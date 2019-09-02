@@ -20,8 +20,10 @@ public class JDBCConnector {
         String sqlResult = this.jdbcQueryForObject(queryTmp);
         System.out.println(">>>>>>> sqlResult: " + sqlResult);
         try {
-            System.out.println(">>>>>>> jdbcTemplate login timeout: " + this.jdbcTemplate.getDataSource()
-                    .getLoginTimeout());
+            if (this.jdbcTemplate.getDataSource() != null) {
+                System.out.println(">>>>>>> jdbcTemplate login timeout: " + this.jdbcTemplate.getDataSource()
+                        .getLoginTimeout());
+            }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
