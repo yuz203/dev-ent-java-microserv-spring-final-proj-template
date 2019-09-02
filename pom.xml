@@ -38,24 +38,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- exclude tomcat jdbc connection pool, use HikariCP
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.tomcat</groupId>
-                    <artifactId>tomcat-jdbc</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        exclude tomcat-jdbc, Spring Boot will use HikariCP automatically
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-        </dependency> -->
+        
     </dependencies>
 
     <build>
