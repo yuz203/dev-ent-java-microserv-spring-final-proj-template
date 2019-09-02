@@ -6,18 +6,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 @RestController
 public class JDBCController {
     @CrossOrigin
     @RequestMapping(value="/helloworld", method= RequestMethod.GET)
-    public static String printCryptTest() throws GeneralSecurityException, IOException {
-        AesServiceUtils aesserviceUtils = new AesServiceUtils();
+    public String printCryptTest() {
+        AesServiceUtils aesServiceUtils = new AesServiceUtils();
 
-        String encryptedStr = aesserviceUtils.encrypt("Hello World!", new File("keyFile.key"));
+        String encryptedStr = aesServiceUtils.encrypt("Hello World!", new File("keyFile.key"));
         File keyFile = new File("keyFile.key");
-        return("Decrypt = " + aesserviceUtils.decrypt(encryptedStr, keyFile));
+        return("Decrypt = " + aesServiceUtils.decrypt(encryptedStr, keyFile));
     }
 }

@@ -19,7 +19,7 @@ public class AesServiceUtils {
      * Encrypt a value and generate a keyfile.
      * If the keyfile is not found, then a new one will be created.
      */
-    public static String encrypt(String value, File keyFile) {
+     String encrypt(String value, File keyFile) {
         byte[] encrypted = "Empty".getBytes();
         try {
             if (!keyFile.exists()) {
@@ -44,7 +44,7 @@ public class AesServiceUtils {
     /**
      * Decrypt a value.
      */
-    public static String decrypt(String message, File keyFile) {
+     String decrypt(String message, File keyFile) {
         byte[] decrypted = "Emtpy".getBytes();
         try {
             SecretKeySpec sks = getSecretKeySpec(keyFile);
@@ -60,8 +60,7 @@ public class AesServiceUtils {
     private static SecretKeySpec getSecretKeySpec(File keyFile)
             throws IOException {
         byte[] key = readKeyFile(keyFile);
-        SecretKeySpec sks = new SecretKeySpec(key, AES);
-        return sks;
+        return new SecretKeySpec(key, AES);
     }
 
     private static byte[] readKeyFile(File keyFile)
@@ -73,9 +72,9 @@ public class AesServiceUtils {
     }
 
     private static String byteArrayToHexString(byte[] b) {
-        StringBuffer sb = new StringBuffer(b.length * 2);
-        for (int i = 0; i < b.length; i++) {
-            int v = b[i] & 0xff;
+        StringBuilder sb = new StringBuilder(b.length * 2);
+        for (byte value : b) {
+            int v = value & 0xff;
             if (v < 16) {
                 sb.append('0');
             }
@@ -96,7 +95,8 @@ public class AesServiceUtils {
 
     public static void main(String... args) {
         if (args[0] != null) {
-            System.out.println(encrypt(args[0], new File("keyFile.key")));
+            AesServiceUtils aesServiceUtils = new AesServiceUtils();
+            System.out.println(aesServiceUtils.encrypt(args[0], new File("keyFile.key")));
         }
     }
 }

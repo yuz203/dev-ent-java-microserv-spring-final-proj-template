@@ -32,7 +32,8 @@ public class JDBCApplication {
     public DataSource getDatasource() {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
                 .replace(")", "");
-        String decryptedPassword = AesServiceUtils.decrypt(encryptedPassword, new File(KEYFILE));
+        AesServiceUtils aesServiceUtils = new AesServiceUtils();
+        String decryptedPassword = aesServiceUtils.decrypt(encryptedPassword, new File(KEYFILE));
         //System.out.println("decryptedPassword = " + decryptedPassword);
         return getDatasourceProperties().initializeDataSourceBuilder()
                 .password(decryptedPassword)
@@ -40,13 +41,12 @@ public class JDBCApplication {
     }
     // --- END: SpringBootApplication Bean
 
-    // Use this in during Application run()
+    // Initialize and call the run method (if class implements CommandLineRunner) during Spring Boot startup
     @Bean
-    public JDBCApplication schedulerRunner(JdbcTemplate jdbcTemplate) {
+    public JDBCConnector schedulerRunner(JdbcTemplate jdbcTemplate) {
         JDBCConnector jdbcConnector = new JDBCConnector();
         jdbcConnector.setJdbcTemplate(jdbcTemplate);
-
-        return new JDBCApplication();
+        return jdbcConnector;
     }
 
     // Main method
