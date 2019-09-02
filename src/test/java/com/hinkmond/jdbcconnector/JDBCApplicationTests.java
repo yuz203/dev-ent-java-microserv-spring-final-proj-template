@@ -11,6 +11,7 @@ public class JDBCApplicationTests {
 
     @Test
     public void contextLoads() {
+        System.out.println("In contextLoads...");
     }
 
 }

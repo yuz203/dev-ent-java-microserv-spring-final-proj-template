@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
-public class AesServiceUtils {
+class AesServiceUtils {
     private final static String AES = "AES";
     private final static String END_OF_FILE = "\\Z";
 
