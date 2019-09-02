@@ -14,11 +14,6 @@ import java.io.File;
 @SpringBootApplication
 public class JDBCApplication {
     private static final String KEYFILE = "keyFile.key";
-    private JdbcTemplate jdbcTemplate;
-
-    private String jdbcQueryForObject(JdbcTemplate jdbcTemplate, String query) {
-        return (jdbcTemplate.queryForObject("SHOW TABLES", String.class));
-    }
 
     /*
      * Solves problem with latest spring boot (with jdbc starter and Hikari)
@@ -37,7 +32,7 @@ public class JDBCApplication {
     public DataSource getDatasource() {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
                 .replace(")", "");
-        String decryptedPassword = Aesservice.decrypt(encryptedPassword, new File(KEYFILE));
+        String decryptedPassword = AesServiceUtils.decrypt(encryptedPassword, new File(KEYFILE));
         //System.out.println("decryptedPassword = " + decryptedPassword);
         return getDatasourceProperties().initializeDataSourceBuilder()
                 .password(decryptedPassword)
@@ -48,11 +43,9 @@ public class JDBCApplication {
     // Use this in during Application run()
     @Bean
     public JDBCApplication schedulerRunner(JdbcTemplate jdbcTemplate) {
-        JDBCApplication jdbcApplication = new JDBCApplication();
-        jdbcApplication.jdbcTemplate = jdbcTemplate;
-        String sqlResult = this.jdbcQueryForObject(jdbcTemplate, "SHOW TABLES");
-        System.out.println(">>>>>>> sqlResult: " + sqlResult);
-        System.out.println(">>>>>>> jdbcTemplate: " + jdbcApplication.jdbcTemplate.toString());
+        JDBCConnector jdbcConnector = new JDBCConnector();
+        jdbcConnector.setJdbcTemplate(jdbcTemplate);
+
         return new JDBCApplication();
     }
 

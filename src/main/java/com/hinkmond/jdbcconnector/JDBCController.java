@@ -14,10 +14,10 @@ public class JDBCController {
     @CrossOrigin
     @RequestMapping(value="/helloworld", method= RequestMethod.GET)
     public static String printCryptTest() throws GeneralSecurityException, IOException {
-        Aesservice aesservice = new Aesservice();
+        AesServiceUtils aesserviceUtils = new AesServiceUtils();
 
-        String encryptedStr = aesservice.encrypt("Hello World!", new File("keyFile.key"));
+        String encryptedStr = aesserviceUtils.encrypt("Hello World!", new File("keyFile.key"));
         File keyFile = new File("keyFile.key");
-        return("Decrypt = " + aesservice.decrypt(encryptedStr, keyFile));
+        return("Decrypt = " + aesserviceUtils.decrypt(encryptedStr, keyFile));
     }
 }

@@ -9,19 +9,15 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-public class Aesservice {
+public class AesServiceUtils {
     private final static String AES = "AES";
     private final static String END_OF_FILE = "\\Z";
 
     /**
      * Encrypt a value and generate a keyfile.
      * If the keyfile is not found, then a new one will be created.
-     *
-     * @throws GeneralSecurityException
-     * @throws IOException if an I/O error occurs
      */
     public static String encrypt(String value, File keyFile) {
         byte[] encrypted = "Empty".getBytes();
@@ -62,7 +58,7 @@ public class Aesservice {
     }
 
     private static SecretKeySpec getSecretKeySpec(File keyFile)
-            throws NoSuchAlgorithmException, IOException {
+            throws IOException {
         byte[] key = readKeyFile(keyFile);
         SecretKeySpec sks = new SecretKeySpec(key, AES);
         return sks;
@@ -96,5 +92,11 @@ public class Aesservice {
             b[i] = (byte) v;
         }
         return b;
+    }
+
+    public static void main(String... args) {
+        if (args[0] != null) {
+            System.out.println(encrypt(args[0], new File("keyFile.key")));
+        }
     }
 }
