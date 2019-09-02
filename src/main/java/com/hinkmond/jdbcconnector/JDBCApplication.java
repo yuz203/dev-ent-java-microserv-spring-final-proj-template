@@ -1,7 +1,5 @@
 package com.hinkmond.jdbcconnector;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -14,13 +12,11 @@ import javax.sql.DataSource;
 import java.io.File;
 
 @SpringBootApplication
-public class JDBCApplication implements CommandLineRunner {
+public class JDBCApplication {
     private static final String KEYFILE = "keyFile.key";
-
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public String jdbcQueryForObject(String query) {
+    private String jdbcQueryForObject(JdbcTemplate jdbcTemplate, String query) {
         return (jdbcTemplate.queryForObject("SHOW TABLES", String.class));
     }
 
@@ -29,12 +25,14 @@ public class JDBCApplication implements CommandLineRunner {
      * To avoid this error:
      *      java.lang.IllegalArgumentException: jdbcUrl is required with driverClassName.
      */
+    // --- BEGIN: SpringBootApplication Bean
     @Bean
     @Primary
     @ConfigurationProperties("spring.datasource")
     public DataSourceProperties getDatasourceProperties() {
         return new DataSourceProperties();
     }
+
     @Bean
     public DataSource getDatasource() {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
@@ -45,15 +43,21 @@ public class JDBCApplication implements CommandLineRunner {
                 .password(decryptedPassword)
                 .build();
     }
+    // --- END: SpringBootApplication Bean
 
-    @Override
-    public void run(String... args) throws Exception {
-        String sqlResult = this.jdbcQueryForObject("SHOW TABLES");
-        System.out.println("sqlResult: " + sqlResult);
+    // Use this in during Application run()
+    @Bean
+    public JDBCApplication schedulerRunner(JdbcTemplate jdbcTemplate) {
+        JDBCApplication jdbcApplication = new JDBCApplication();
+        jdbcApplication.jdbcTemplate = jdbcTemplate;
+        String sqlResult = this.jdbcQueryForObject(jdbcTemplate, "SHOW TABLES");
+        System.out.println(">>>>>>> sqlResult: " + sqlResult);
+        System.out.println(">>>>>>> jdbcTemplate: " + jdbcApplication.jdbcTemplate.toString());
+        return new JDBCApplication();
     }
 
     // Main method
-    public static void main(String[] args) {
+    public static void main(String... args) {
         SpringApplication.run(JDBCApplication.class, args);
     }
 }
