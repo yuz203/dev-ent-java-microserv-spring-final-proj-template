@@ -1,5 +1,7 @@
 package com.hinkmond.jdbcconnector;
 
+import org.springframework.stereotype.Component;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
+@Component("aesServiceUtils")
 class AesServiceUtils {
     private final static String AES = "AES";
     private final static String END_OF_FILE = "\\Z";

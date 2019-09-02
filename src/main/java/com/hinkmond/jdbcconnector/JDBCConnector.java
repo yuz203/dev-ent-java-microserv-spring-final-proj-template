@@ -2,6 +2,8 @@ package com.hinkmond.jdbcconnector;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.sql.SQLException;
+
 public class JDBCConnector {
     private JdbcTemplate jdbcTemplate;
 
@@ -17,6 +19,11 @@ public class JDBCConnector {
         String queryTmp = "SHOW TABLES";
         String sqlResult = this.jdbcQueryForObject(queryTmp);
         System.out.println(">>>>>>> sqlResult: " + sqlResult);
-        System.out.println(">>>>>>> jdbcTemplate: " + this.jdbcTemplate.toString());
+        try {
+            System.out.println(">>>>>>> jdbcTemplate login timeout: " + this.jdbcTemplate.getDataSource()
+                    .getLoginTimeout());
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
     }
 }

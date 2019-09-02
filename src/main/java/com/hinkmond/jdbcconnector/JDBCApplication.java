@@ -14,7 +14,6 @@ import java.io.File;
 @SpringBootApplication
 public class JDBCApplication {
     private static final String KEYFILE = "keyFile.key";
-
     /*
      * Solves problem with latest spring boot (with jdbc starter and Hikari)
      * To avoid this error:
@@ -29,12 +28,10 @@ public class JDBCApplication {
     }
 
     @Bean
-    public DataSource getDatasource() {
+    public DataSource getDatasource(AesServiceUtils aesServiceUtils) {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
                 .replace(")", "");
-        AesServiceUtils aesServiceUtils = new AesServiceUtils();
         String decryptedPassword = aesServiceUtils.decrypt(encryptedPassword, new File(KEYFILE));
-        //System.out.println("decryptedPassword = " + decryptedPassword);
         return getDatasourceProperties().initializeDataSourceBuilder()
                 .password(decryptedPassword)
                 .build();
