@@ -24,13 +24,17 @@ public class JDBCApplication implements CommandLineRunner {
         return (jdbcTemplate.queryForObject("SHOW TABLES", String.class));
     }
 
+    /*
+     * Solves problem with latest spring boot (with jdbc starter and Hikari)
+     * To avoid this error:
+     *      java.lang.IllegalArgumentException: jdbcUrl is required with driverClassName.
+     */
     @Bean
     @Primary
     @ConfigurationProperties("spring.datasource")
     public DataSourceProperties getDatasourceProperties() {
         return new DataSourceProperties();
     }
-
     @Bean
     public DataSource getDatasource() {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
