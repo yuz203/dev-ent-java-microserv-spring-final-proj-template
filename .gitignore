@@ -1,6 +1,10 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+/.mvn/
+mvnw
+mvnw.cmd
+keyFile.key
 
 ### STS ###
 .apt_generated
