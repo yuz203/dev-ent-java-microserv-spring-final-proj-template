@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 @SpringBootApplication
 public class JDBCApplication {
     private static final String KEYFILEPATH = "./keyFile.key";
+
     /*
      * Solves problem with latest spring boot (with jdbc starter and Hikari)
      * To avoid this error:
