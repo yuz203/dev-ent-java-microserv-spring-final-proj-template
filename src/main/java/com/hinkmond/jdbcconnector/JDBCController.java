@@ -12,10 +12,10 @@ public class JDBCController {
     @CrossOrigin
     @RequestMapping(value="/helloworld", method= RequestMethod.GET)
     public String printCryptTest() {
-        AesServiceUtils aesServiceUtils = new AesServiceUtils();
+        AesUtils aesUtils = new AesUtils();
 
-        String encryptedStr = aesServiceUtils.encrypt("Hello World!", new File("keyFile.key"));
+        String encryptedStr = aesUtils.encrypt("Hello World!", new File("keyFile.key"));
         File keyFile = new File("keyFile.key");
-        return("Decrypt = " + aesServiceUtils.decrypt(encryptedStr, keyFile));
+        return("Decrypt = " + aesUtils.decrypt(encryptedStr, keyFile));
     }
 }

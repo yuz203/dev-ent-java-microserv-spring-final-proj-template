@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
-@Component("aesServiceUtils")
-class AesServiceUtils {
+@Component("aesUtils")
+class AesUtils {
     private final static String AES = "AES";
     private final static String END_OF_FILE = "\\Z";
 
@@ -98,8 +98,8 @@ class AesServiceUtils {
 
     public static void main(String... args) {
         if (args[0] != null) {
-            AesServiceUtils aesServiceUtils = new AesServiceUtils();
-            System.out.println(aesServiceUtils.encrypt(args[0], new File("keyFile.key")));
+            AesUtils aesUtils = new AesUtils();
+            System.out.println(aesUtils.encrypt(args[0], new File("keyFile.key")));
         }
     }
 }

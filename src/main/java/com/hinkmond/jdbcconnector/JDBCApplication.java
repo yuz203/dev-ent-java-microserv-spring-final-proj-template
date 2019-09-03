@@ -28,10 +28,10 @@ public class JDBCApplication {
     }
 
     @Bean
-    public DataSource getDatasource(AesServiceUtils aesServiceUtils) {
+    public DataSource getDatasource(AesUtils aesUtils) {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
                 .replace(")", "");
-        String decryptedPassword = aesServiceUtils.decrypt(encryptedPassword, new File(KEYFILE));
+        String decryptedPassword = aesUtils.decrypt(encryptedPassword, new File(KEYFILE));
         return getDatasourceProperties().initializeDataSourceBuilder()
                 .password(decryptedPassword)
                 .build();
