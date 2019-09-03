@@ -28,7 +28,7 @@ public class JDBCApplication {
     }
 
     @Bean
-    public DataSource getDatasource(AesUtils aesUtils) {
+    public DataSource getDatasource(AESUtils aesUtils) {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
                 .replace(")", "");
         String decryptedPassword = aesUtils.decrypt(encryptedPassword, new File(KEYFILE));

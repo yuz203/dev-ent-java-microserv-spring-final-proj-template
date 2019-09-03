@@ -14,7 +14,7 @@ import java.security.GeneralSecurityException;
 import java.util.Scanner;
 
 @Component("aesUtils")
-class AesUtils {
+class AESUtils {
     private final static String AES = "AES";
     private final static String END_OF_FILE = "\\Z";
 
@@ -98,7 +98,7 @@ class AesUtils {
 
     public static void main(String... args) {
         if (args[0] != null) {
-            AesUtils aesUtils = new AesUtils();
+            AESUtils aesUtils = new AESUtils();
             System.out.println(aesUtils.encrypt(args[0], new File("keyFile.key")));
         }
     }
