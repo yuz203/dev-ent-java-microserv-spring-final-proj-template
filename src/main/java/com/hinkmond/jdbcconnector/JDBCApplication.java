@@ -9,11 +9,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.io.File;
 
 @SpringBootApplication
 public class JDBCApplication {
-    private static final String KEYFILE = "keyFile.key";
+    private static final String KEYFILEPATH = "./keyFile.key";
     /*
      * Solves problem with latest spring boot (with jdbc starter and Hikari)
      * To avoid this error:
@@ -31,7 +30,7 @@ public class JDBCApplication {
     public DataSource getDatasource(AESUtils aesUtils) {
         String encryptedPassword = getDatasourceProperties().getPassword().replace("ENCRYPTED(", "")
                 .replace(")", "");
-        String decryptedPassword = aesUtils.decrypt(encryptedPassword, new File(KEYFILE));
+        String decryptedPassword = aesUtils.decrypt(encryptedPassword, KEYFILEPATH);
         return getDatasourceProperties().initializeDataSourceBuilder()
                 .password(decryptedPassword)
                 .build();
