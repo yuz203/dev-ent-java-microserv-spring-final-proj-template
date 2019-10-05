@@ -99,7 +99,7 @@ class AESUtils {
     }
 
     public static void main(String... args) {
-        if (args[0] != null) {
+        if ((args.length > 0) && (args[0] != null)) {
             AESUtils aesUtils = new AESUtils();
             System.out.println(aesUtils.encrypt(args[0], "./keyFile.key"));
         }
