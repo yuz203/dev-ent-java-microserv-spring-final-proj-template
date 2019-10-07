@@ -16,7 +16,7 @@ public class JDBCConnector {
 
     void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        String queryTmp = "SHOW TABLES";
+        String queryTmp = "SHOW TABLES;";
         String sqlResult = this.jdbcQueryForObject(queryTmp);
         System.out.println(">>>>>>> sqlResult: " + sqlResult);
         try {
