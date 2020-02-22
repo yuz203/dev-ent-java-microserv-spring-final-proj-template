@@ -22,7 +22,7 @@ class AESUtils {
      * Encrypt a value and generate a keyfile.
      * If the keyfile is not found, then a new one will be created.
      */
-     String encrypt(String value, String keyFilePath) {
+    String encrypt(String value, String keyFilePath) {
         byte[] encrypted = "Empty".getBytes();
         try {
             File keyFile = new File(keyFilePath);
@@ -48,7 +48,7 @@ class AESUtils {
     /**
      * Decrypt a value.
      */
-     String decrypt(String message, String keyFilePath) {
+    String decrypt(String message, String keyFilePath) {
         byte[] decrypted = "Emtpy".getBytes();
         try {
             File keyFile = new File(keyFilePath);
@@ -99,9 +99,10 @@ class AESUtils {
     }
 
     public static void main(String... args) {
-        if ((args.length > 0) && (args[0] != null)) {
+        String origStr = args.length == 0 ? "" : args[1];
+        if (!(origStr.equals(""))) {
             AESUtils aesUtils = new AESUtils();
-            System.out.println(aesUtils.encrypt(args[0], "./keyFile.key"));
+            System.err.println(aesUtils.encrypt(origStr,"./keyFile.key"));
         }
     }
 }
