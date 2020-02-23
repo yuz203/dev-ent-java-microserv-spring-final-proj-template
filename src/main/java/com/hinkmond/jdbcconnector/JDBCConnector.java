@@ -12,7 +12,7 @@ public class JDBCConnector {
         if (query == null) {
             return "NULL query";
         }
-        return (this.jdbcTemplate.queryForObject(query, String.class));
+        return this.jdbcTemplate.queryForObject(query, String.class);
     }
 
     void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
