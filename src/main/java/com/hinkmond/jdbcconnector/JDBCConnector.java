@@ -6,19 +6,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class JDBCConnector {
-    private JdbcTemplate jdbcTemplate;
+    private static JdbcTemplate jdbcTemplate;
 
-    private String jdbcQueryForObject(String query) {
-        if (query == null) {
-            return "NULL query";
-        }
-        return (this.jdbcTemplate.queryForObject(query, String.class));
+    public static JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
     }
 
     void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        JDBCConnector.jdbcTemplate = jdbcTemplate;
         String queryTmp = "SHOW TABLES;";
-        List<String> sqlResult = this.jdbcTemplate.queryForList(queryTmp, String.class);
+        List<String> sqlResult = JDBCConnector.jdbcTemplate.queryForList(queryTmp, String.class);
         System.out.println(">>>>>>> sqlResult: " + sqlResult);
         try {
             if (jdbcTemplate.getDataSource() != null) {
