@@ -9,10 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hinkmond</groupId>
-    <artifactId>jdbcconnector</artifactId>
+    <artifactId>spring-jdbc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jdbcconnector</name>
-    <description>JDBC Connector</description>
+
+    <packaging>${artifact-packaging}</packaging>
+    <name>${project.artifactId}</name>
 
     <properties>
         <java.version>11</java.version>
@@ -39,8 +40,55 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>local-jar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <artifact-packaging>jar</artifact-packaging>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>true</executable>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>remote-war</id>
+            <properties>
+                <artifact-packaging>war</artifact-packaging>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <!-- Remove version info from war file name -->
+                            <finalName>${project.artifactId}</finalName>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
