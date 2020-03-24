@@ -1,4 +1,4 @@
-package com.hinkmond.jdbcconnector;
+package com.hinkmond.finalproj;
 
 
 public class AddUserData {

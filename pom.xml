@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hinkmond</groupId>
-    <artifactId>spring-jdbc</artifactId>
+    <artifactId>spring-proj-template</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>${artifact-packaging}</packaging>

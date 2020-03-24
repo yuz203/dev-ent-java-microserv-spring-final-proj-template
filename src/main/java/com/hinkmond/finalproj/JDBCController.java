@@ -1,4 +1,4 @@
-package com.hinkmond.jdbcconnector;
+package com.hinkmond.finalproj;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -19,7 +19,6 @@ public class JDBCController {
     }
 
     @CrossOrigin
-    @SuppressWarnings("SqlResolve")
     @RequestMapping(value = "/printAllUsers", method = RequestMethod.GET)
     public String printAllUsers() {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
@@ -41,7 +40,6 @@ public class JDBCController {
     }
 
     @CrossOrigin
-    @SuppressWarnings("SqlResolve")
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(@RequestBody AddUserData addUserData) {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
@@ -57,7 +55,6 @@ public class JDBCController {
     }
 
     @CrossOrigin
-    @SuppressWarnings("SqlResolve")
     @RequestMapping(value = "/printAllAccts", method = RequestMethod.GET)
     public String printAllAccts() {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();

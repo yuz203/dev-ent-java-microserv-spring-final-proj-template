@@ -1,9 +1,11 @@
-package com.hinkmond.jdbcconnector;
+package com.hinkmond.finalproj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-public class JDBCApplication {
+public class JDBCApplication extends SpringBootServletInitializer {
     private static final String KEYFILEPATH = "./keyFile.key";
 
     /*
@@ -44,6 +46,11 @@ public class JDBCApplication {
         JDBCConnector jdbcConnector = new JDBCConnector();
         jdbcConnector.setJdbcTemplate(jdbcTemplate);
         return jdbcConnector;
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(JDBCApplication.class);
     }
 
     // Main method
