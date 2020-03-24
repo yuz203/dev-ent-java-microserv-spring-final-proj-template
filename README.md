@@ -1,2 +1,2 @@
-# dev-ent-java-microserv-spring-jdbc
-Spring JDBC Connector
+# dev-ent-java-microserv-spring-final-proj-template
+Spring Final Project Template
