@@ -48,7 +48,7 @@
   ```
   
   
-  **Add Customer**
+**Add Customer**
 ----
   Returns json data about whether add customer successfully or not.
 
@@ -101,7 +101,7 @@
   ```
   
   
-  **Delete Customer**
+**Delete Customer**
 ----
   Returns json data about whether delete customer successfully or not.
 
