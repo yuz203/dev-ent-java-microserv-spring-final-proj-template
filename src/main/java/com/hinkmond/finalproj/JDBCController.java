@@ -19,12 +19,12 @@ public class JDBCController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/printAllUsers", method = RequestMethod.GET)
-    public String printAllUsers() {
+    @RequestMapping(value = "/printAllCustomers", method = RequestMethod.GET)
+    public String printAllCustomers() {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
         StringBuilder resultStr = new StringBuilder();
 
-        String queryStr = "SELECT * from user_info;";
+        String queryStr = "SELECT * from customer;";
         SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(queryStr);
         while (sqlRowSet.next()) {
             resultStr.append(sqlRowSet.getString("user_id")).append(", ")
@@ -36,38 +36,35 @@ public class JDBCController {
                     .append(sqlRowSet.getString("created_at"))
                     .append("\n");
         }
-        return ("SELECT * from user_info:\n" + resultStr);
+        return ("SELECT * from customer:\n" + resultStr);
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@RequestBody AddUserData addUserData) {
+    @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
+    public String addCustomer(@RequestBody AddCustomerData addCustomerData) {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
-        String queryStr = "INSERT INTO user_info (first_name, last_name, addr, email) " +
+        String queryStr = "INSERT INTO customer (first_name, last_name, addr, email) " +
                 "VALUES (" +
-                "'" + addUserData.getFirstName() + "'," +
-                "'" + addUserData.getLastName() + "'," +
-                "'" + addUserData.getAddress() + "'," +
-                "'" + addUserData.getEmail() + "'" +
+                "'" + addCustomerData.getFirstName() + "'," +
+                "'" + addCustomerData.getLastName() + "'," +
+                "'" + addCustomerData.getAddress() + "'," +
+                "'" + addCustomerData.getEmail() + "'" +
                 ");";
         int rowsUpdated = jdbcTemplate.update(queryStr);
         return ("Rows updated: " + rowsUpdated);
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/printAllAccts", method = RequestMethod.GET)
-    public String printAllAccts() {
+    @RequestMapping(value = "/deleteCustomer", method = RequestMethod.POST)
+    public String deleteCustomer(@RequestBody DeleteCustomerData deleteCustomerData) {
         JdbcTemplate jdbcTemplate = JDBCConnector.getJdbcTemplate();
-        StringBuilder resultStr = new StringBuilder();
-
-        String queryStr = "SELECT * from acct_info;";
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(queryStr);
-        while (sqlRowSet.next()) {
-            resultStr.append(sqlRowSet.getString("user_id")).append(", ")
-                    .append(sqlRowSet.getString("acct_num")).append(", ")
-                    .append(sqlRowSet.getString("balance"))
-                    .append("\n");
-        }
-        return ("SELECT * from acct_info:\n" + resultStr);
+        String queryStr = "DELETE FROM customer WHERE first_name = " +
+                "'" + deleteCustomerData.getFirstName() + "' " +
+                "AND last_name = " +
+                "'" + deleteCustomerData.getLastName() + "';";
+        int rowsUpdated = jdbcTemplate.update(queryStr);
+        return ("Rows updated: " + rowsUpdated);
     }
+
+
 }

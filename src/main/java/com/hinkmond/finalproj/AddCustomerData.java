@@ -1,7 +1,7 @@
 package com.hinkmond.finalproj;
 
 
-public class AddUserData {
+public class AddCustomerData {
     private String firstName;
     private String lastName;
     private String address;
