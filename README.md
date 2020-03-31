@@ -30,7 +30,6 @@ Here is what this little application demonstrates:
 * Full integration with the latest **Spring** Framework: inversion of control, dependency injection, etc.
 * Packaging as a single war with embedded container (tomcat 9): No need to install a container separately on the host just run using the ``java -jar`` command
 * Writing a RESTful service using annotation: supports both XML and JSON request / response; simply use desired ``Accept`` header in your request
-* Exception mapping from application exceptions to the right HTTP response with exception details in the body
 * *Spring Data* Integration with just a few lines of configuration and familiar annotations. 
 
 Here are some endpoints you can call:
@@ -52,6 +51,8 @@ Content: a list of customers
 ### Add Customer
 
 ```
+http://localhost:8080/addCustomer
+
 POST /addCustomer
 Accept: application/json
 Content-Type: application/json
@@ -69,6 +70,8 @@ Rows updated: 1(base)
 ### Delete Customer
 
 ```
+http://localhost:8080/deleteCustomer
+
 POST /deleteCustomer
 Accept: application/json
 Content-Type: application/json
