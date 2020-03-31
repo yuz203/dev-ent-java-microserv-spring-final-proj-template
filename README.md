@@ -1,10 +1,10 @@
 # dev-ent-java-microserv-spring-final-proj-template
 
-This is a sample Spring Framework application that show how to show all customers, add and delete customer.
+This is a sample Spring Framework application that show how to show all customers, add and delete customer. This project is based on AWS EC2 instance, I installed Mysql and Jetty on my AWS EC2 instance. When I finished code change, package them into a WAR, upload WAR to under the "webapps" directory in Jetty on my AWS EC2 instance. When I restart Jetty on AWS EC2 instance, Jetty will launch my project automatically, and connect to Mysql installed also on AWS EC2 instance, after that you can use these Restful APIs exposed by this project.
 
 ## How to Run 
 
-You can use the Tomcat embeded in Spring to run it. And this application is packaged as a war in github, so you can also upload it to under the "webapps" directory of your own Web Server like Jetty / Tomacat.
+You can use the Tomcat embeded in Spring to run it. And this application is packaged as a war in github, so you can also upload it to under the "webapps" directory of your own Web Server like Jetty / Tomcat.
 
 * Clone this repository 
 * You can build the project and run the tests
