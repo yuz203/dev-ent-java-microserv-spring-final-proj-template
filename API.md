@@ -46,3 +46,57 @@
       }
     });
   ```
+  
+  
+  **Add Customer**
+----
+  Returns json data about whether add customer successfully or not.
+
+* **URL**
+
+  /addCustomer 
+  
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+  None 
+
+* **Data Params**
+
+  firstName: required 
+  lastName: required
+  address: required
+  email: required
+  example : {"firstName": "Mary", "lastName": "Smith", "address": "777 First St.", "email": "marysmith@gmail.com"}
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `Rows updated: 1(base)`
+
+* **Error Response:**
+
+  * **Code:** 400 Invalid Request Exception <br />
+    **Content:** `{ error : "Invalid request" }`
+
+  OR
+
+  * **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ error : "You are unauthorized to make this request." }`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/addCustomer",
+      dataType: "json",
+      type : "POST",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
+
